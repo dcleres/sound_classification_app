@@ -132,7 +132,10 @@ dmypy.json
 Data/
 
 # Apple Files
-.DS_Store
+**/.DS_Store
+
+# Ignore Jupyter Notebook files
+**.ipynb
 
 # VS Code stuff
 .vscode/*
