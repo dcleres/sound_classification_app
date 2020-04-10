@@ -6,7 +6,6 @@ from keras.layers import BatchNormalization
 from keras.layers import Activation
 
 
-
 def base_model(num_rows, num_columns, num_channels, num_labels):
 
     model = Sequential()
