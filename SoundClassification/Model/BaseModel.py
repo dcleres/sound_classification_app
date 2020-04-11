@@ -3,6 +3,8 @@ import os
 # os.environ["KERAS_BACKEND"] = "plaidml.keras.backend"
 os.environ["KERAS_BACKEND"] = "tensorflow"
 
+import matplotlib.pyplot as plt
+
 import models
 import model_cfg
 
@@ -27,11 +29,17 @@ class BaseModel:
     def define_model(self, model="base"):
         # Construct model
         if model == "base":
+            print("LOADING base MODEL")
             self.model = models.base_model(self.num_rows, self.num_columns, self.num_channels, self.num_labels)
             self.define_loss_and_optimizer(loss="categorical_crossentropy", metrics=["accuracy"], optimizer="adam")
         elif model == "batch_norm":
+            print("LOADING batch_norm MODEL")
             self.model = models.batch_norm_model(self.num_rows, self.num_columns, self.num_channels, self.num_labels)
             self.define_loss_and_optimizer(loss="categorical_crossentropy", metrics=["accuracy"], optimizer="adadelta")
+        elif model == "larger_base_model":
+            print("LOADING larger_base_model MODEL")
+            self.model = models.larger_base_model(self.num_rows, self.num_columns, self.num_channels, self.num_labels)
+            self.define_loss_and_optimizer(loss="categorical_crossentropy", metrics=["accuracy"], optimizer="adam")
         else:
             assert model in ["base", "batch_norm"], "ERROR: Unknown model " + model
 
@@ -55,7 +63,7 @@ class BaseModel:
         checkpointer = ModelCheckpoint(filepath=saved_model_filename, verbose=1, save_best_only=True)
 
         start = datetime.now()
-        self.model.fit(
+        history = self.model.fit(
             x_train,
             y_train,
             batch_size=self.num_batch_size,
@@ -64,6 +72,26 @@ class BaseModel:
             callbacks=[checkpointer],
             verbose=1,
         )
+
+        # Plot training & validation accuracy values
+        plt.plot(history.history['accuracy'])
+        plt.plot(history.history['val_accuracy'])
+        plt.title('Model accuracy')
+        plt.ylabel('Accuracy')
+        plt.xlabel('Epoch')
+        plt.legend(['Train', 'Test'], loc='upper left')
+        plt.savefig("training_validation_accuracy.png")
+        plt.close()
+
+        # Plot training & validation loss values
+        plt.plot(history.history['loss'])
+        plt.plot(history.history['val_loss'])
+        plt.title('Model loss')
+        plt.ylabel('Loss')
+        plt.xlabel('Epoch')
+        plt.legend(['Train', 'Test'], loc='upper left')
+        plt.savefig("training_validation_loss_values.png")
+        plt.close()
 
         # Save the final model
         # self.model.save(os.path.join(model_cfg.MODEL_PATH, "saved_models/final_model.h5"))

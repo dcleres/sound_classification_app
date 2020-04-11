@@ -5,6 +5,7 @@ from sklearn.preprocessing import LabelBinarizer
 import os
 from sklearn.model_selection import train_test_split
 import model_cfg
+from tqdm import tqdm
 
 
 def convert_data_to_mfcc(wave, sampling_rate, max_pad_len=256, padding=True):
@@ -65,9 +66,15 @@ def build_train_array(label, max_samples=200):
     X = np.array([]).reshape(-1, 96000, 2, 1)  # 96 000 is 2 seconds at sample rate 48 000
     X_mfcc = np.array([]).reshape(-1, 256, 256, 1)
 
-    for filename in os.listdir(os.path.join(model_cfg.AUDIOSET_PATH, label)):
-        data_path = os.path.join(model_cfg.AUDIOSET_PATH, label, filename)
-        data, samplerate = sf.read(data_path)
+    for filename in tqdm(os.listdir(os.path.join(model_cfg.AUDIOSET_PATH, label))):
+        if filename == ".DS_Store":
+            continue
+        
+        try:
+            data_path = os.path.join(model_cfg.AUDIOSET_PATH, label, filename)
+            data, samplerate = sf.read(data_path)
+        except RuntimeError:
+            continue
 
         # Crop 2 seconds pieces of the audio to train on 2 second files
         X_samples = shorten_recording(data, samplerate)
