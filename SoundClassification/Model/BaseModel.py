@@ -84,7 +84,7 @@ class BaseModel:
         plt.ylabel('Accuracy')
         plt.xlabel('Epoch')
         plt.legend(['Train', 'Test'], loc='upper left')
-        plt.savefig("training_validation_accuracy.png")
+        plt.savefig(model_cfg.MODEL_PATH, "saved_models/training_validation_accuracy.png")
         plt.close()
 
         # Plot training & validation loss values
@@ -94,7 +94,7 @@ class BaseModel:
         plt.ylabel('Loss')
         plt.xlabel('Epoch')
         plt.legend(['Train', 'Test'], loc='upper left')
-        plt.savefig("training_validation_loss_values.png")
+        plt.savefig(model_cfg.MODEL_PATH, "saved_models/training_validation_loss_values.png")
         plt.close()
 
         # Save the final model
