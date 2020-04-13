@@ -129,7 +129,7 @@ dmypy.json
 .pyre/
 
 # Data Folder
-Data/
+Data/AudioSet/audio/
 
 # Apple Files
 **/.DS_Store
