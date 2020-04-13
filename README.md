@@ -21,16 +21,22 @@ The model was trained on 2 seconds recordings. In order to get the 2 seconds rec
 The model was trained on a 90% training and 10% testing ratio and reached an accuracy above 96% on the training and validation sets. This is an impressive result since some of the training data might actually contain wrong labels because of the 2 seconds division of the training data.
 The model was trained on 100 epochs and took 8 hours to run on a MacBook Pro 15" from 2016.
 
-![SoundClassification/Model/saved_models/training_validation_accuracy.png]
+![Accuracy](https://github.com/dcleres/sound_classification_app/blob/master/SoundClassification/Model/saved_models/training_validation_accuracy.png)
 
-![SoundClassification/Model/saved_models/training_validation_loss_values.png]
+![Loss](https://github.com/dcleres/sound_classification_app/blob/master/SoundClassification/Model/saved_models/training_validation_loss_values.png)
 
 ## Android Application
 The trained weights on the deep neural network was saved to a tflife file which could then be read on a mobile device.
 The user of the app could sing, speak, or say nothing to the app and get a prediction of whether the user sang, spoke or said nothing
 to the camera. The App is a 2 screen app and shows nice performance. Some screenshots can be found below.
 
+![mainscreen](https://github.com/dcleres/sound_classification_app/blob/master/screenshots/main_screen.png)
 
+![mainscreen](https://github.com/dcleres/sound_classification_app/blob/master/screenshots/recording.png)
+
+![mainscreen](https://github.com/dcleres/sound_classification_app/blob/master/screenshots/inference_done_state.png)
+
+![mainscreen](https://github.com/dcleres/sound_classification_app/blob/master/screenshots/inference_result.png)
 
 
 ## Acknowledgement
