@@ -148,3 +148,6 @@ Data/AudioSet/audio/
 
 # Local History for Visual Studio Code
 .history/
+
+# PowerPoint Presentations
+*.pptx
