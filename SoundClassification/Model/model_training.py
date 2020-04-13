@@ -6,8 +6,6 @@ if __name__ == "__main__":
 
     random_seed = 1
     test_size = 0.1
-    num_rows = 256
-    num_columns = 256
     num_channels = 1
     num_labels = 3
     num_batch_size = 16
@@ -15,11 +13,20 @@ if __name__ == "__main__":
     # model_name = "batch_norm"
     model_name = "larger_base_model"
     # model_name = "base"
+    # model_name = "lambda_base"
     max_samples = 2500
     is_exporting_to_tf_lite = True
+    is_using_mfcc = True
+
+    if is_using_mfcc:
+        num_rows = 256
+        num_columns = 256
+    else:
+        num_rows = 1
+        num_columns = 96000
 
     X_train, X_test, y_train, y_test = load_data.get_train_test_data(
-        test_size=test_size, random_state=random_seed, max_samples=max_samples
+        test_size=test_size, random_state=random_seed, max_samples=max_samples, is_using_mfcc=is_using_mfcc
     )
 
     base_model = BaseModel.BaseModel(

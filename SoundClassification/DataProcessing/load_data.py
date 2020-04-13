@@ -66,10 +66,11 @@ def build_train_array(label, max_samples=200):
     X = np.array([]).reshape(-1, 96000, 2, 1)  # 96 000 is 2 seconds at sample rate 48 000
     X_mfcc = np.array([]).reshape(-1, 256, 256, 1)
 
+
     for filename in tqdm(os.listdir(os.path.join(model_cfg.AUDIOSET_PATH, label))):
         if filename == ".DS_Store":
             continue
-        
+
         try:
             data_path = os.path.join(model_cfg.AUDIOSET_PATH, label, filename)
             data, samplerate = sf.read(data_path)
@@ -114,9 +115,15 @@ def get_all_sound_data(max_samples):
     return X, X_mfcc, categorical_label, categorical_label_mfcc
 
 
-def get_train_test_data(test_size=0.2, random_state=1, max_samples=100):
+def get_train_test_data(test_size=0.2, random_state=1, max_samples=100, is_using_mfcc=False):
     X, X_mfcc, y_categorical, categorical_label_mfcc = get_all_sound_data(max_samples)
-    X_train, X_test, y_train, y_test = train_test_split(
-        X_mfcc, categorical_label_mfcc, test_size=test_size, random_state=random_state
-    )
+
+    if is_using_mfcc:
+        X_train, X_test, y_train, y_test = train_test_split(
+            X_mfcc, categorical_label_mfcc, test_size=test_size, random_state=random_state
+        )
+    else:
+        X_train, X_test, y_train, y_test = train_test_split(
+            X[:, :, 0, :], y_categorical, test_size=test_size, random_state=random_state
+        )
     return X_train, X_test, y_train, y_test

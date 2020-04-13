@@ -4,3 +4,4 @@ echo $PYTHONPATH
 
 conda activate eth
 
+cd /Users/dcleres/sound_classification_app

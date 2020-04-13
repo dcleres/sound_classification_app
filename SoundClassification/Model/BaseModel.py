@@ -32,6 +32,10 @@ class BaseModel:
             print("LOADING base MODEL")
             self.model = models.base_model(self.num_rows, self.num_columns, self.num_channels, self.num_labels)
             self.define_loss_and_optimizer(loss="categorical_crossentropy", metrics=["accuracy"], optimizer="adam")
+        elif model == "lambda_base":
+            print("LOADING base_lambda MODEL")
+            self.model = models.base_lambda_model(self.num_rows, self.num_columns, self.num_channels, self.num_labels)
+            self.define_loss_and_optimizer(loss="categorical_crossentropy", metrics=["accuracy"], optimizer="adam")
         elif model == "batch_norm":
             print("LOADING batch_norm MODEL")
             self.model = models.batch_norm_model(self.num_rows, self.num_columns, self.num_channels, self.num_labels)
