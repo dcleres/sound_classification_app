@@ -38,6 +38,61 @@ to the camera. The App is a 2 screen app and shows nice performance. Some screen
 
 ![mainscreen](https://github.com/dcleres/sound_classification_app/blob/master/screenshots/inference_result.png)
 
+The APK and bundles of the project can be found in the following folders: 
+
+- For the APK: `AndroidApp/app/build/outputs/apk/debug/app-debug.apk`
+- For the Bundles: `AndroidApp/app/build/outputs/bundle/debug/app-debug.aab`
+
+
+## How to run the code
+In order to run the code please run the following commands in order.
+the Software was developed on MasOS and Linux
+
+Please create a conda environment called `eth`. you can also give it another name but paths and some constants will need to be changed.
+
+Please install the conda environment from the requirement.txt file by running: 
+
+```
+pip install -r requirements.txt
+```
+
+or if pip installation conflicts are giving you trouble:
+
+```
+conda install -r requirements.txt
+```
+
+[OPTIONAL] If you want to install the pre-commit hook which is useful to have a linter and code formatter at each commit please run the following commands: 
+
+```
+pip install pre-commit
+pre-commit install
+````
+
+In order to setup the environment in one command please run the following command:
+
+```
+source setup_script.sh
+````
+
+To be able to run this file you need to add to the PATH in your .bashrc (on Linux) or .bash-profile (on MacOS) the path to this folder. Then quit and re-open the terminal an run the command above.
+
+To download the data from Google AudioSet, run the following script:
+
+````
+python Data/AudioSet/download_data.py
+````
+
+To train the models, please run the following command:
+
+````
+mkdir SoundClassification/Model/saved_pb_models_for_android
+mkdir SoundClassification/Model/saved_models
+
+python SoundClassification/Model/model_training.py
+````
+
+Have fun using the code!
 
 ## Acknowledgement
 This App was implemented for the Center for Digital Health Interventions by David Cleres.

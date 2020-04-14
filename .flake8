@@ -1,0 +1,20 @@
+[flake8]
+ignore = E203, E266, E501, W503, F403, C901, E402, E231, F811, E722
+max-line-length = 120
+max-complexity = 18
+select = C,E,F,W,B,B950
+"""
+The file is organised in the following way:
+- ignore: errors to ignore at commit.
+- max-line-length: Maximal length of a code line.
+- max-complexity: McCabe Cyclomatic Complexity (e.g., as discussed in NIST 500-235) is a measure of the complexity of a piece of software. Rather than counting the number of lines of code, cyclomatic complexity (roughly speaking) counts the number of decision points within the software.
+Additional information regardingthe ignore field. All the Flake rules can be found here (https://www.flake8rules.com/):
+- E203: Whitespace before ':'
+- E266: Too many leading '#' for block comment
+- E501: Line too long (82 > 79 characters)
+- W503:	Line break occurred before a binary operator
+- F403: 'from module import *' used; unable to detect undefined names
+- C901: Function is too complex
+- E402: Module level import not at top of file
+- F811: redefinition of unused name from line N
+"""

@@ -1,0 +1,35 @@
+# This in the succession of commands triggered when a commit is done in the Framework part of the code.
+# The first tool which is launched is called Black. Black is the uncompromising Python code formatter. More details here: https://github.com/psf/black.
+# The pre-commit-hooks library has more smaller modules with self-explanatory names listed in the "id" label.
+# Flake8 is a Style Guide Enforcement tool. One can set the rules to enforce or ignore in the ".flake8" file.
+# pyupgrade is a tool (and pre-commit hook) to automatically upgrade syntax for newer versions of the language.
+# reorder_python_imports is tool to re-order the imports made in a given file.
+repos:
+-   repo: https://github.com/psf/black
+    rev: stable
+    hooks:
+    - id: black
+      language_version: python3.6
+-   repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v2.1.0
+    hooks:
+    -   id: trailing-whitespace
+    -   id: end-of-file-fixer
+    -   id: check-json
+    -   id: check-yaml
+    -   id: debug-statements
+    -   id: name-tests-test
+    -   id: requirements-txt-fixer
+-   repo: https://gitlab.com/pycqa/flake8
+    rev: 3.7.7
+    hooks:
+    -   id: flake8
+-   repo: https://github.com/asottile/pyupgrade
+    rev: v1.12.0
+    hooks:
+    -   id: pyupgrade
+-   repo: https://github.com/asottile/reorder_python_imports
+    rev: v1.4.0
+    hooks:
+    -   id: reorder-python-imports
+        language_version: python3
